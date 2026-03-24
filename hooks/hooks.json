@@ -1,0 +1,20 @@
+{
+  "hooks": [
+    {
+      "event": "PreToolUse",
+      "tools": ["Write", "Edit"],
+      "type": "prompt",
+      "prompt": "Check if the content being written contains hardcoded secrets, API keys, passwords, private keys, tokens, or connection strings. If found, BLOCK and warn the user."
+    },
+    {
+      "event": "Stop",
+      "type": "prompt",
+      "prompt": "Check if this conversation included file edits (Write or Edit tool calls) but no /nazar:scan was invoked. If so, add a single reminder line: 'Kod degisikligi yapildi ama guvenlik taramasi yapilmadi. /nazar:scan ile tarama yapmanizi oneririm.' Do NOT block, only remind."
+    },
+    {
+      "event": "UserPromptSubmit",
+      "type": "prompt",
+      "prompt": "If the user message contains 'deploy', 'push', 'release', 'publish', 'yayinla', 'store', check if a preflight scan was done in this session. If not, suggest: 'Deploy oncesi /nazar:preflight ile store kontrolu yapmanizi oneririm.'"
+    }
+  ]
+}
